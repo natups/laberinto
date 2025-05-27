@@ -2,7 +2,7 @@ import Game from './game.js';
 
 var config = {
   type: Phaser.AUTO,
-  width: 1920,
+  width: 1080,
   height: 720,
   scale: {
     mode: Phaser.Scale.FIT,
@@ -19,7 +19,7 @@ var config = {
   physics: {
     default: "arcade",
     arcade: {
-      gravity: { y: 300 },
+      gravity: { y: 0 },
       debug: false,
     },
   },
