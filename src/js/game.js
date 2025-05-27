@@ -1,7 +1,7 @@
 let mariposa;
 let cursors;
 
-class Game extends Phaser.Scene {
+export default class Game extends Phaser.Scene {
     constructor() {
         super('game');
     }
@@ -38,12 +38,22 @@ class Game extends Phaser.Scene {
         // Hacer que la mariposa colisione con la capa
         this.physics.add.collider(mariposa, layer);
 
+        this.physics.world.setBounds(0, 0, 3840, 800);
+
         // Cámara que sigue a la mariposa
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
         this.cameras.main.startFollow(mariposa);
 
         // Controles del teclado
         cursors = this.input.keyboard.createCursorKeys();
+
+
+        const debugGraphics = this.add.graphics().setAlpha(0.75);
+        layer.renderDebug(debugGraphics, {
+      tileColor: null, // Color of non-colliding tiles
+      collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
+      faceColor: new Phaser.Display.Color(40, 39, 37, 255), // Color of colliding face edges
+    });
     }
 
     update() {
@@ -65,20 +75,3 @@ class Game extends Phaser.Scene {
     }
 }
 
-// Configuración del juego
-const config = {
-    type: Phaser.AUTO,
-    width: 800,
-    height: 600,
-    physics: {
-        default: 'arcade',
-        arcade: {
-            gravity: { y: 0 },
-            debug: false
-        }
-    },
-    scene: Game
-};
-
-// Iniciar el juego
-const game = new Phaser.Game(config);
