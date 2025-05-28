@@ -44,13 +44,14 @@ export default class Game extends Phaser.Scene {
         // Cámara que sigue a la mariposa
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels); // la camara no se sale de los limites del mapa
         this.cameras.main.startFollow(mariposa);
-        //this.cameras.main.setZoom(2); // acercar la cámara
+        this.cameras.main.setZoom(3); // acercar la cámara
 
+        
         //efecto de luz
-
-        /* Rectángulo negro que cubre TODA la vista.
+        /*
+        Rectángulo negro que cubre TODA la vista.
         ScrollFactor 0  → no se mueve con el mapa.
-        Depth 1000      → siempre encima (solo efecto visual). */
+        Depth 1000      → siempre encima (solo efecto visual).
         this.darkness = this.add.graphics()
         .setScrollFactor(0)
         .setDepth(1000);
@@ -73,7 +74,7 @@ export default class Game extends Phaser.Scene {
         this.darkness.setMask(lightMask);
 
         // Guardamos ref. a la mariposa para usarla en update()
-        this.player = mariposa;
+        this.player = mariposa;*/
 
         // Controles del teclado
         cursors = this.input.keyboard.createCursorKeys();   
@@ -103,25 +104,26 @@ export default class Game extends Phaser.Scene {
             mariposa.body.setVelocityY(speed);
         }
 
+        /*
         // Actualizar círculo de luz
         this.lightMaskGfx.clear();
 
         const cam   = this.cameras.main;
         const zoom  = cam.zoom;
 
-        /* Posición del jugador relativa a la pantalla,
-        ajustada por el zoom. */
+        Posición del jugador relativa a la pantalla,
+        ajustada por el zoom.
         const cx = (this.player.x - cam.scrollX) * zoom;
         const cy = (this.player.y - cam.scrollY) * zoom;
 
-        /* Dibujamos varios círculos concéntricos para un borde suave.
-        Ajustá `baseRadius` y la cantidad de pasos a gusto. */
+        Dibujamos varios círculos concéntricos para un borde suave.
+        Ajustá `baseRadius` y la cantidad de pasos a gusto.
         const baseRadius = 60 * zoom;
         for (let i = 0; i < 6; i++) {
             const radius = baseRadius + i * 15 * zoom;   // más grande hacia afuera
             const alpha  = 0.25 - i * 0.04;              // menos opacidad hacia afuera
             this.lightMaskGfx.fillStyle(0xffffff, alpha);
             this.lightMaskGfx.fillCircle(cx, cy, radius);
-        }
+        }*/
     }
 }
