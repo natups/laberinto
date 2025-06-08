@@ -1,4 +1,5 @@
-import Game from './game.js';
+import laberinto1 from './laberinto1.js';
+import laberinto2 from './laberinto2.js';
 
 var config = {
   type: Phaser.AUTO,
@@ -25,7 +26,7 @@ var config = {
   },
   // Listado de todas las escenas del juego, en orden
   // La primera escena es con la cual empieza el juego
-  scene: [Game],
+  scene: [laberinto1, laberinto2],
 };
 
 var game = new Phaser.Game(config);
