@@ -50,6 +50,7 @@ export default class Game extends Phaser.Scene {
         // Cámara que sigue a la mariposa
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels); // la camara no se sale de los limites del mapa
         this.cameras.main.startFollow(this.mariposa);
+        this.cameras.main.setZoom(3);
 
         this.Flores = this.physics.add.group();
         const objetosFlores = map.getObjectLayer('objetos').objects.filter(obj => obj.name === 'Flor');

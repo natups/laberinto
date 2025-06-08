@@ -16,7 +16,7 @@ export default class Game extends Phaser.Scene {
         // Texto final
         this.add.text(this.scale.width / 2, this.scale.height / 2, `¡Ganaste!\nTotal de ítems recolectados: ${total}`, {
             fontFamily: '"Press Start 2P"',
-            fontSize: '24px',
+            fontSize: '30px',
             color: '#FFFFFF',
             align: 'center'
         }).setOrigin(0.5);
@@ -24,7 +24,7 @@ export default class Game extends Phaser.Scene {
         this.add.text(this.scale.width / 2, this.scale.height / 2 + 80, 
 'Presiona R para reiniciar', {
             fontFamily: '"Press Start 2P"',
-            fontSize: '16px',
+            fontSize: '24px',
             fill: '#FFFFFF',
             align: 'center'
         }).setOrigin(0.5);

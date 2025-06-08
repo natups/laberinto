@@ -13,6 +13,8 @@ export default class Game extends Phaser.Scene {
         this.load.image('mariposa', 'public/assets/images/mariposa.png');
         this.load.image('Flor', 'public/assets/images/flor.png');
         this.load.image('portal', 'public/assets/images/portal.png');
+        this.load.image('mosca', 'public/assets/images/mosca.png');
+
     }
 
     create() {
@@ -20,6 +22,7 @@ export default class Game extends Phaser.Scene {
         const tileset = map.addTilesetImage('tilemap2', 'tilemap2');
         const layer = map.createLayer('plataforma', tileset, 0, 0);
         layer.setCollisionByProperty({ colision: true });
+
 
         const spawnPoint = map.findObject('objetos', obj => obj.name === 'Jugador');
         this.mariposa = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, 'mariposa');
@@ -29,6 +32,7 @@ export default class Game extends Phaser.Scene {
         this.physics.world.setBounds(0, 0, 3840, 800);
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
         this.cameras.main.startFollow(this.mariposa);
+        this.cameras.main.setZoom(3);
 
         this.Flores = this.physics.add.group();
         const objetosFlores = map.getObjectLayer('objetos').objects.filter(obj => obj.name === 'Flor');
@@ -49,6 +53,34 @@ export default class Game extends Phaser.Scene {
             fontSize: '24px',
             fill: '#FFD700'
         });
+
+        // Enemigos
+        this.enemigos = this.physics.add.group();
+        this.physics.add.collider(this.enemigos, layer);
+
+        // Crear enemigos
+        map.getObjectLayer('objetos').objects.forEach(obj => {
+            if (obj.name === 'Enemigo') {
+                const enemigo = this.enemigos.create(obj.x, obj.y - obj.height, 'mosca');
+                enemigo.setCollideWorldBounds(true);
+                enemigo.body.setAllowGravity(false);
+                enemigo.setVelocityY(100); // velocidad inicial hacia abajo
+                enemigo.body.setBounce(1, 1); // rebote al colisionar
+                enemigo.setScale(1.5);
+            }
+        });
+
+        // Colisión entre enemigos y paredes, con rebote invertido manual
+        this.physics.add.collider(this.enemigos, layer, (enemigo, tile) => {
+            enemigo.body.velocity.y *= -1;
+        });
+
+        // Colisión con jugador
+        this.physics.add.overlap(this.mariposa, this.enemigos, () => {
+            const spawnPoint = map.findObject('objetos', obj => obj.name === 'Jugador');
+            this.mariposa.setPosition(spawnPoint.x, spawnPoint.y);
+        }, null, this);
+
 
         const portalObj = map.findObject('objetos', obj => obj.name === 'Portal');
         this.portal = this.physics.add.sprite(portalObj.x, portalObj.y - portalObj.height, 'portal');
