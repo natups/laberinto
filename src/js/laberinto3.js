@@ -1,12 +1,12 @@
 export default class Game extends Phaser.Scene {
     constructor() {
-        super('laberinto2');
+        super('laberinto3');
     }
 
     preload() {
         // mapa y assets
-        this.load.image('tilemap2', 'public/assets/tilemaps/tilemap2.png');
-        this.load.tilemapTiledJSON('mapa2', 'public/assets/tilemaps/mapa2.json');
+        this.load.image('tilemap1', 'public/assets/tilemaps/tilemap1.png');
+        this.load.tilemapTiledJSON('mapa3', 'public/assets/tilemaps/mapa3.json');
 
         // Cargar sprite de mariposa
         this.load.image('mariposa', 'public/assets/images/mariposa.png');
@@ -18,10 +18,10 @@ export default class Game extends Phaser.Scene {
 
     create() {
         // Crear el mapa desde el archivo JSON
-        const map = this.make.tilemap({ key: 'mapa2' });
+        const map = this.make.tilemap({ key: 'mapa3' });
 
         // Asociar el nombre del tileset (de Tiled) con el archivo de imagen
-        const tileset = map.addTilesetImage('tilemap2', 'tilemap2');
+        const tileset = map.addTilesetImage('tilemap1', 'tilemap1');
 
         // Crear la capa llamada "plataforma" 
         const layer = map.createLayer('plataforma', tileset, 0, 0);
