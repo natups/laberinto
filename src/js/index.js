@@ -1,10 +1,13 @@
-import { Preloads } from "../scenes/preloads.js";
-import { MainMenu } from "../scenes/mainmenu.js";
+import laberinto1 from './laberinto1.js';
+import laberinto2 from './laberinto2.js';
+import laberinto3 from './laberinto3.js';
+import victoria from './victoria.js';
+
 
 var config = {
   type: Phaser.AUTO,
-  width: 800,
-  height: 600,
+  width: 1080,
+  height: 720,
   scale: {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
@@ -20,13 +23,13 @@ var config = {
   physics: {
     default: "arcade",
     arcade: {
-      gravity: { y: 300 },
+      gravity: { y: 0 },
       debug: false,
     },
   },
   // Listado de todas las escenas del juego, en orden
   // La primera escena es con la cual empieza el juego
-  scene: [Preloads, MainMenu],
+  scene: [laberinto1, laberinto2, laberinto3, victoria],
 };
 
 var game = new Phaser.Game(config);
